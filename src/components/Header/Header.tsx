@@ -4,6 +4,7 @@ import logo from "../../assets/logo.svg";
 import cartIcon from "../../assets/icon-cart.svg";
 import userAvatar from "../../assets/image-avatar.png";
 import { MobileMenu } from "../MobileMenu/MobileMenu";
+import { DesktopMenu } from "../DesktopMenu/DesktopMenu";
 
 const links = [
   { id: nanoid(), name: "Collections" },
@@ -20,18 +21,29 @@ export const Header = () => {
       display="flex"
       alignItems="center"
       justifyContent="space-between"
-      p="10px 25px"
+      p={{ base: "10px 25px", md: "35px 0" }}
+      borderBottom={{ md: "1px solid hsl(220, 14%, 75%)" }}
     >
-      <Box display="flex" alignItems="center" gap={4}>
+      <Box display="flex" alignItems="center" gap={{ md: "3.438rem" }}>
         <MobileMenu links={links} />
         <Image src={logo} alt="Sneakers logo" />
+        <DesktopMenu links={links} />
       </Box>
-      <Box display="flex" alignItems="center" gap="0.35rem">
+      <Box
+        display="flex"
+        alignItems="center"
+        gap={{ base: "0.35rem", md: "2.813rem" }}
+      >
         <Button type="button" variant="unstyled">
           <Image src={cartIcon} alt="Cart icon" />
         </Button>
-        <Box w="30px" h="30px">
-          <Image src={userAvatar} alt="Your photo" />
+        <Box w={{ base: "30px", md: "50px" }} h={{ base: "30px", md: "50px" }}>
+          <Image
+            src={userAvatar}
+            alt="Your photo"
+            w={{ md: "50px" }}
+            h={{ md: "50px" }}
+          />
         </Box>
       </Box>
     </Box>

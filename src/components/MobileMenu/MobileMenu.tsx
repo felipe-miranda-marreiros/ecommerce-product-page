@@ -7,6 +7,8 @@ import {
   DrawerCloseButton,
   Image,
   useDisclosure,
+  Box,
+  Button,
 } from "@chakra-ui/react";
 import { Props } from "./MobileMenuProps";
 import mobileMenuIcon from "../../assets/icon-menu.svg";
@@ -18,10 +20,10 @@ export const MobileMenu: React.FC<Props> = ({ links }) => {
   const btnRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <>
-      <button type="button" ref={btnRef} onClick={onOpen}>
-        <Image src={mobileMenuIcon} />
-      </button>
+    <Box display={{ md: "none" }}>
+      <Button type="button" ref={btnRef} onClick={onOpen} variant="unstyled">
+        <Image src={mobileMenuIcon} lineHeight={0} />
+      </Button>
       <Drawer
         isOpen={isOpen}
         placement="left"
@@ -34,10 +36,15 @@ export const MobileMenu: React.FC<Props> = ({ links }) => {
             <Image src={mobileCloseIcon} />
           </DrawerCloseButton>
           <DrawerBody mt={20}>
-            <NavbarList links={links} />
+            <NavbarList
+              links={links}
+              direction="column"
+              gap="1.5rem"
+              weight={700}
+            />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-    </>
+    </Box>
   );
 };
