@@ -14,6 +14,17 @@ const colors = {
   },
 };
 
+const popover = {
+  Popover: {
+    baseStyle: {
+      content: {
+        border: "none",
+        backgroundColor: "red",
+      },
+    },
+  },
+};
+
 const fonts = {
   body: "Kumbh Sans, sans-serif",
 };
@@ -21,4 +32,7 @@ const fonts = {
 export const theme = extendTheme({
   colors,
   fonts,
+  components: {
+    ...popover,
+  },
 });

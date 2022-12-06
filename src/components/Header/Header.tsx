@@ -22,7 +22,7 @@ export const Header = () => {
       alignItems="center"
       justifyContent="space-between"
       p={{ base: "10px 25px", md: "35px 0" }}
-      borderBottom={{ md: "1px solid hsl(220, 14%, 75%)" }}
+      borderBottom={{ md: "1px solid #b6bcc867" }}
     >
       <Box display="flex" alignItems="center" gap={{ md: "3.438rem" }}>
         <MobileMenu links={links} />
