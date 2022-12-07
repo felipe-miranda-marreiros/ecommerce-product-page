@@ -40,7 +40,7 @@ export const Carousel = () => {
   };
 
   return (
-    <Box>
+    <Box display={{ md: "none" }}>
       <Box position="relative">
         <Image src={images[index]} h="300px" w="100%" alt="Product image" />
         <Button
