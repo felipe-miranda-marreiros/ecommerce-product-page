@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, Button, Image } from "@chakra-ui/react";
 
-import productThumbnail1 from "../../assets/image-product-1-thumbnail.jpg";
-import productThumbnail2 from "../../assets/image-product-2-thumbnail.jpg";
-import productThumbnail3 from "../../assets/image-product-3-thumbnail.jpg";
-import productThumbnail4 from "../../assets/image-product-4-thumbnail.jpg";
-
 import productImage1 from "../../assets/image-product-1.jpg";
 import productImage2 from "../../assets/image-product-2.jpg";
 import productImage3 from "../../assets/image-product-3.jpg";
