@@ -9,14 +9,9 @@ import {
 } from "@chakra-ui/react";
 import { ProductViewProps } from "../../protocols/ProductProps";
 
-export const ProductGallery: React.FC<ProductViewProps> = ({
-  productImages,
-  thumbnails,
-  onOpen,
-  tabIndex,
-  setIndex,
-  modalMode,
-}) => {
+export const ProductGallery: React.FC<ProductViewProps> = (props) => {
+  const { productImages, thumbnails, onOpen, tabIndex, setIndex, modalMode } =
+    props;
   return (
     <Tabs
       index={modalMode ? tabIndex : undefined}

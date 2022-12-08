@@ -1,10 +1,10 @@
 export interface ProductViewProps {
   productImages: Array<string>;
   thumbnails: Array<string>;
-  onOpen?: () => void;
   tabIndex?: number;
-  setIndex?: (number: number) => void;
   modalMode?: boolean;
+  onOpen?: () => void;
+  setIndex?: (number: number) => void;
 }
 
 export interface ModalProps {

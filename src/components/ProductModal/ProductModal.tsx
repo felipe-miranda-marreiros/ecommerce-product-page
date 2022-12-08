@@ -11,16 +11,17 @@ import nextIcon from "../../assets/icon-next.svg";
 import previousIcon from "../../assets/icon-previous.svg";
 import { ProductModalProps } from "../../protocols/ProductProps";
 
-export const ProductModal: React.FC<ProductModalProps> = ({
-  isOpen,
-  onClose,
-  productImages,
-  thumbnails,
-  setIndex,
-  handleNextImage,
-  handlePreviousImage,
-  tabIndex,
-}) => {
+export const ProductModal: React.FC<ProductModalProps> = (props) => {
+  const {
+    isOpen,
+    onClose,
+    productImages,
+    thumbnails,
+    setIndex,
+    handleNextImage,
+    handlePreviousImage,
+    tabIndex,
+  } = props;
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
