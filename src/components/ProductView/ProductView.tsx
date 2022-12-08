@@ -1,65 +1,173 @@
 import {
-  Box,
   Image,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  useDisclosure,
+  Box,
+  Button,
 } from "@chakra-ui/react";
-import productImage1 from "../../assets/image-product-1.jpg";
-import productImage2 from "../../assets/image-product-2.jpg";
-import productImage3 from "../../assets/image-product-3.jpg";
-import productImage4 from "../../assets/image-product-4.jpg";
 
-import productThumbnail1 from "../../assets/image-product-1-thumbnail.jpg";
-import productThumbnail2 from "../../assets/image-product-2-thumbnail.jpg";
-import productThumbnail3 from "../../assets/image-product-3-thumbnail.jpg";
-import productThumbnail4 from "../../assets/image-product-4-thumbnail.jpg";
+import nextIcon from "../../assets/icon-next.svg";
+import previousIcon from "../../assets/icon-previous.svg";
+import ProductGalleryHooks from "../../hooks/ProductGalleryHooks";
 
-const productThumbnails = [
-  productThumbnail1,
-  productThumbnail2,
-  productThumbnail3,
-  productThumbnail4,
-];
+interface ProductViewProps {
+  productImages: Array<string>;
+  thumbnails: Array<string>;
+  onOpen?: () => void;
+  index?: number;
+  setIndex?: (number: number) => void;
+  modalMode?: boolean;
+}
 
-const productImages = [
-  productImage1,
-  productImage2,
-  productImage3,
-  productImage4,
-];
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  handlePreviousImage: () => void;
+  handleNextImage: () => void;
+}
 
-export const ProductView = () => {
+function ProductModal({
+  isOpen,
+  onClose,
+  productImages,
+  thumbnails,
+  setIndex,
+  handleNextImage,
+  handlePreviousImage,
+  index,
+}: ModalProps & ProductViewProps) {
   return (
-    <Box>
-      <Tabs variant="unstyled">
-        <TabPanels>
-          {productImages.map((image, i) => {
-            return (
-              <TabPanel key={i}>
-                <Image
-                  borderRadius="16px"
-                  display={{ base: "none", md: "block" }}
-                  src={image}
-                />
-              </TabPanel>
-            );
-          })}
-        </TabPanels>
-        <TabList mt="1rem">
-          {productThumbnails.map((thumbnail, i) => {
-            return (
-              <Tab
-                key={i}
-                _notLast={{ marginRight: "1rem" }}
-                p={0}
+    <>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay display={{ base: "none", md: "block" }} />
+        <ModalContent
+          position="relative"
+          borderRadius="none"
+          backgroundColor="unset"
+          boxShadow="none"
+        >
+          <ModalCloseButton
+            top={-12}
+            size="lg"
+            right={-2}
+            color="primary.orange"
+            display={{ base: "none", md: "block" }}
+          />
+          <Button
+            position="absolute"
+            top="45%"
+            left="-10%"
+            backgroundColor="white"
+            variant="ghost"
+            rounded="full"
+            transform="translate(50%, -100%)"
+            zIndex={2}
+            display={{ base: "none", md: "block" }}
+            onClick={handlePreviousImage}
+            disabled={index === 0}
+          >
+            <Image src={previousIcon} alt="" />
+          </Button>
+          <Button
+            position="absolute"
+            top="45%"
+            right="-10%"
+            backgroundColor="white"
+            variant="ghost"
+            rounded="full"
+            transform="translate(-50%, -100%)"
+            zIndex={2}
+            display={{ base: "none", md: "block" }}
+            onClick={handleNextImage}
+            disabled={index === productImages.length - 1}
+          >
+            <Image src={nextIcon} alt="" />
+          </Button>
+          <ProductGallery
+            productImages={productImages}
+            thumbnails={thumbnails}
+            index={index}
+            setIndex={setIndex}
+            modalMode
+          />
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+
+const ProductGallery: React.FC<ProductViewProps> = ({
+  productImages,
+  thumbnails,
+  onOpen,
+  index,
+  setIndex,
+  modalMode,
+}) => {
+  return (
+    <Tabs
+      index={modalMode ? index : undefined}
+      onChange={(index) => (setIndex ? setIndex(index) : null)}
+      variant="unstyled"
+      display={{ base: "none", md: "block" }}
+      position="relative"
+    >
+      <TabPanels>
+        {productImages.map((image, i) => {
+          return (
+            <TabPanel p={0} key={i} cursor="pointer" onClick={onOpen}>
+              <Image
+                borderRadius="16px"
+                display={{ base: "none", md: "block" }}
+                src={image}
+              />
+            </TabPanel>
+          );
+        })}
+      </TabPanels>
+      <TabList mt="1.5rem">
+        {thumbnails.map((thumbnail, i) => {
+          return (
+            <Tab
+              key={i}
+              _notLast={{ marginRight: "2rem" }}
+              p={0}
+              position="relative"
+              overflow="hidden"
+              _selected={{
+                border: "4px solid orange",
+                borderRadius: "16px",
+                _after: {
+                  content: '""',
+                  position: "absolute",
+                  inset: 0,
+                  backgroundColor: "white",
+                  opacity: "0.6",
+                  display: "block",
+                },
+              }}
+            >
+              <Box
+                position="relative"
                 overflow="hidden"
-                _selected={{
-                  border: "4px solid orange",
-                  borderRadius: "16px",
-                  opacity: "0.4",
+                _hover={{
+                  _after: {
+                    content: '""',
+                    position: "absolute",
+                    inset: 0,
+                    backgroundColor: "white",
+                    opacity: "0.6",
+                    display: "block",
+                    borderRadius: "11px",
+                  },
                 }}
               >
                 <Image
@@ -67,11 +175,43 @@ export const ProductView = () => {
                   borderRadius="11px"
                   src={thumbnail}
                 />
-              </Tab>
-            );
-          })}
-        </TabList>
-      </Tabs>
-    </Box>
+              </Box>
+            </Tab>
+          );
+        })}
+      </TabList>
+    </Tabs>
+  );
+};
+
+export const ProductView: React.FC<ProductViewProps> = ({
+  productImages,
+  thumbnails,
+}) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [handleNextImage, handlePreviousImage, index, setIndex] =
+    ProductGalleryHooks();
+
+  return (
+    <>
+      <ProductModal
+        isOpen={isOpen}
+        onClose={onClose}
+        productImages={productImages}
+        handleNextImage={handleNextImage}
+        handlePreviousImage={handlePreviousImage}
+        thumbnails={thumbnails}
+        index={index}
+        setIndex={setIndex}
+        modalMode
+      />
+      <ProductGallery
+        onOpen={onOpen}
+        productImages={productImages}
+        thumbnails={thumbnails}
+        setIndex={handleNextImage}
+        index={index}
+      />
+    </>
   );
 };

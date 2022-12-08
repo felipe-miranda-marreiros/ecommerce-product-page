@@ -8,6 +8,7 @@ import productImage4 from "../../assets/image-product-4.jpg";
 
 import nextIcon from "../../assets/icon-next.svg";
 import previousIcon from "../../assets/icon-previous.svg";
+import useProductGalleryHooks from "../../hooks/ProductGalleryHooks";
 
 const productImages = [
   productImage1,
@@ -17,27 +18,18 @@ const productImages = [
 ];
 
 export const Carousel = () => {
-  const [index, setIndex] = useState(0);
-  const [images, setImages] = useState(productImages);
-
-  useEffect(() => {
-    if (index >= images.length || index < 0) {
-      return setIndex(0);
-    }
-  }, [index]);
-
-  const handleNextImage = () => {
-    setIndex((prevState) => prevState + 1);
-  };
-
-  const handlePreviousImage = () => {
-    setIndex((prevState) => prevState - 1);
-  };
+  const [handleNextImage, handlePreviousImage, index, setIndex] =
+    useProductGalleryHooks();
 
   return (
     <Box display={{ md: "none" }}>
       <Box position="relative">
-        <Image src={images[index]} h="300px" w="100%" alt="Product image" />
+        <Image
+          src={productImages[index]}
+          h="300px"
+          w="100%"
+          alt="Product image"
+        />
         <Button
           position="absolute"
           top="50%"
