@@ -35,7 +35,7 @@ function App() {
       <Flex
         direction={{ base: "column", md: "row" }}
         paddingBlock={{ lg: "5rem", md: "2.5rem" }}
-        paddingInline={{ lg: "3.5rem", md: "1.75" }}
+        paddingInline={{ lg: "3.5rem", md: "1.75rem" }}
         gap={{ lg: "7rem" }}
       >
         <Carousel />

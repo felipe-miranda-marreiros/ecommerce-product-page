@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Box, Button, Image } from "@chakra-ui/react";
 
 import productImage1 from "../../assets/image-product-1.jpg";
@@ -18,7 +17,7 @@ const productImages = [
 ];
 
 export const Carousel = () => {
-  const [handleNextImage, handlePreviousImage, index, setIndex] =
+  const [handleNextImage, handlePreviousImage, index] =
     useProductGalleryHooks();
 
   return (
@@ -39,6 +38,7 @@ export const Carousel = () => {
           rounded="full"
           transform="translate(50%, -100%)"
           onClick={handlePreviousImage}
+          disabled={index === 0}
         >
           <Image src={previousIcon} alt="" />
         </Button>
@@ -52,6 +52,7 @@ export const Carousel = () => {
           rounded="full"
           transform="translate(-50%, -100%)"
           onClick={handleNextImage}
+          disabled={index === productImages.length - 1}
         >
           <Image src={nextIcon} alt="" />
         </Button>

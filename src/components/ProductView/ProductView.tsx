@@ -22,7 +22,7 @@ interface ProductViewProps {
   productImages: Array<string>;
   thumbnails: Array<string>;
   onOpen?: () => void;
-  index?: number;
+  tabIndex?: number;
   setIndex?: (number: number) => void;
   modalMode?: boolean;
 }
@@ -42,7 +42,7 @@ function ProductModal({
   setIndex,
   handleNextImage,
   handlePreviousImage,
-  index,
+  tabIndex,
 }: ModalProps & ProductViewProps) {
   return (
     <>
@@ -72,7 +72,7 @@ function ProductModal({
             zIndex={2}
             display={{ base: "none", md: "block" }}
             onClick={handlePreviousImage}
-            disabled={index === 0}
+            disabled={tabIndex === 0}
           >
             <Image src={previousIcon} alt="" />
           </Button>
@@ -87,14 +87,14 @@ function ProductModal({
             zIndex={2}
             display={{ base: "none", md: "block" }}
             onClick={handleNextImage}
-            disabled={index === productImages.length - 1}
+            disabled={tabIndex === productImages.length - 1}
           >
             <Image src={nextIcon} alt="" />
           </Button>
           <ProductGallery
             productImages={productImages}
             thumbnails={thumbnails}
-            index={index}
+            tabIndex={tabIndex}
             setIndex={setIndex}
             modalMode
           />
@@ -108,13 +108,13 @@ const ProductGallery: React.FC<ProductViewProps> = ({
   productImages,
   thumbnails,
   onOpen,
-  index,
+  tabIndex,
   setIndex,
   modalMode,
 }) => {
   return (
     <Tabs
-      index={modalMode ? index : undefined}
+      index={modalMode ? tabIndex : undefined}
       onChange={(index) => (setIndex ? setIndex(index) : null)}
       variant="unstyled"
       display={{ base: "none", md: "block" }}
@@ -201,7 +201,7 @@ export const ProductView: React.FC<ProductViewProps> = ({
         handleNextImage={handleNextImage}
         handlePreviousImage={handlePreviousImage}
         thumbnails={thumbnails}
-        index={index}
+        tabIndex={index}
         setIndex={setIndex}
         modalMode
       />
@@ -209,8 +209,8 @@ export const ProductView: React.FC<ProductViewProps> = ({
         onOpen={onOpen}
         productImages={productImages}
         thumbnails={thumbnails}
-        setIndex={handleNextImage}
-        index={index}
+        tabIndex={index}
+        setIndex={setIndex}
       />
     </>
   );

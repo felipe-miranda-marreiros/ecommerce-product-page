@@ -11,9 +11,7 @@ const useProductGalleryHooks = () => {
     setIndex((prevState) => prevState - 1);
   };
 
-  return React.useMemo(() => {
-    return [handleNextImage, handlePreviousImage, index, setIndex] as const;
-  }, [index]);
+  return [handleNextImage, handlePreviousImage, index, setIndex] as const;
 };
 
 export default useProductGalleryHooks;
