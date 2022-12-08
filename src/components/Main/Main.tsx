@@ -14,10 +14,17 @@ import { Cart } from "../../assets/icon/Cart";
 
 export const Main = () => {
   return (
-    <VStack as="main" align="flex-start" p="25px" spacing="1rem">
+    <VStack
+      as="main"
+      align="flex-start"
+      justify="center"
+      p={{ base: "25px" }}
+      spacing={{ base: "1rem", lg: "1.6rem" }}
+    >
       <Heading
         as="h1"
-        size={{ base: "xs" }}
+        size={{ base: "xs", lg: "sm" }}
+        letterSpacing={{ lg: "widest" }}
         color="primary.orange"
         textTransform="uppercase"
       >
@@ -36,7 +43,7 @@ export const Main = () => {
         >
           Fall Limited Edition Sneakers
         </Heading>
-        <Text as="p" color="neutral.dark-grayish-blue">
+        <Text as="p" color="neutral.dark-grayish-blue" w={{ lg: "50ch" }}>
           These low-profile sneakers are your perfect casual wear companion.
           Featuring a durable rubber outer sole, they’ll withstand everything
           the weather can offer.
@@ -94,8 +101,9 @@ export const Main = () => {
         </Box>
         <Button
           leftIcon={<Cart color="white" />}
-          variant="solid"
           backgroundColor="primary.orange"
+          p="1.4rem 0"
+          _hover={{ opacity: "0.5" }}
           color="white"
           w="100%"
           boxShadow="0px 10px 40px #ff7d1ab0"

@@ -28,12 +28,17 @@ export const ProductGallery: React.FC<ProductViewProps> = (props) => {
                 borderRadius="16px"
                 display={{ base: "none", md: "block" }}
                 src={image}
+                h={modalMode ? "555px" : undefined}
               />
             </TabPanel>
           );
         })}
       </TabPanels>
-      <TabList mt="1.5rem">
+      <TabList
+        mt="1.5rem"
+        w={modalMode ? "400px" : undefined}
+        marginInline="auto"
+      >
         {thumbnails.map((thumbnail, i) => {
           return (
             <Tab

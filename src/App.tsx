@@ -30,22 +30,23 @@ const productImages = [
 
 function App() {
   return (
-    <Container px={{ md: "1rem" }} maxW={{ lg: "container.xl" }} minH="100vh">
+    <>
       <Header />
-      <Flex
-        direction={{ base: "column", md: "row" }}
-        paddingBlock={{ lg: "5rem", md: "2.5rem" }}
-        paddingInline={{ lg: "3.5rem", md: "1.75rem" }}
-        gap={{ lg: "7rem" }}
+      <Container
+        paddingBlock={{ base: 0, md: "5rem" }}
+        px={{ md: "45px" }}
+        maxW={{ lg: "1110px" }}
       >
-        <Carousel />
-        <ProductView
-          productImages={productImages}
-          thumbnails={productThumbnails}
-        />
-        <Main />
-      </Flex>
-    </Container>
+        <Flex direction={{ base: "column", md: "row" }} gap={{ lg: "5rem" }}>
+          <Carousel />
+          <ProductView
+            productImages={productImages}
+            thumbnails={productThumbnails}
+          />
+          <Main />
+        </Flex>
+      </Container>
+    </>
   );
 }
 

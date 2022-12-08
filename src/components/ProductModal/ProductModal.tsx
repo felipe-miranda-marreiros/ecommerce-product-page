@@ -24,7 +24,7 @@ export const ProductModal: React.FC<ProductModalProps> = (props) => {
   } = props;
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size="lg">
         <ModalOverlay display={{ base: "none", md: "block" }} />
         <ModalContent
           position="relative"

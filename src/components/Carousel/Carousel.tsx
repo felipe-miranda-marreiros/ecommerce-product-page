@@ -28,6 +28,7 @@ export const Carousel = () => {
           h="300px"
           w="100%"
           alt="Product image"
+          objectFit={{ base: "cover" }}
         />
         <Button
           position="absolute"

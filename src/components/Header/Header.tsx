@@ -21,8 +21,10 @@ export const Header = () => {
       display="flex"
       alignItems="center"
       justifyContent="space-between"
-      p={{ base: "10px 25px", md: "35px 0" }}
+      p={{ base: "10px 25px", md: "35px 25px" }}
       borderBottom={{ md: "1px solid #b6bcc867" }}
+      maxW="1145px"
+      m="auto"
     >
       <Box display="flex" alignItems="center" gap={{ md: "3.438rem" }}>
         <MobileMenu links={links} />
@@ -32,7 +34,7 @@ export const Header = () => {
       <Box
         display="flex"
         alignItems="center"
-        gap={{ base: "0.35rem", md: "2.813rem" }}
+        gap={{ base: "0.35rem", md: "1.3rem" }}
       >
         <Button type="button" variant="unstyled">
           <Image src={cartIcon} alt="Cart icon" />
