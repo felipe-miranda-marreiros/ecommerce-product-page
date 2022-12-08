@@ -1,25 +1,10 @@
-import {
-  Box,
-  Image,
-  Button,
-  useDisclosure,
-  Text,
-  Heading,
-  Portal,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverHeader,
-  PopoverBody,
-} from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 import logo from "../../assets/logo.svg";
-import cartIcon from "../../assets/icon-cart.svg";
 import userAvatar from "../../assets/image-avatar.png";
 import { MobileMenu } from "../MobileMenu/MobileMenu";
 import { DesktopMenu } from "../DesktopMenu/DesktopMenu";
+import { ProductCart } from "../ProductCart/ProductCart";
 
 const links = [
   { id: nanoid(), name: "Collections" },
@@ -51,36 +36,7 @@ export const Header = () => {
         alignItems="center"
         gap={{ base: "0.35rem", md: "1.3rem" }}
       >
-        <Popover closeOnBlur strategy="fixed" boundary="clippingParents">
-          <PopoverTrigger>
-            <Button type="button" variant="unstyled">
-              <Image src={cartIcon} alt="Cart icon" />
-            </Button>
-          </PopoverTrigger>
-          <Portal>
-            <PopoverContent>
-              <PopoverHeader
-                p="20px"
-                fontSize="md"
-                color="black"
-                fontWeight={700}
-              >
-                Cart
-              </PopoverHeader>
-              <PopoverBody
-                p="20px"
-                fontSize="sm"
-                flex="1"
-                display="grid"
-                placeItems="center"
-                color="neutral.dark-grayish-blue"
-                fontWeight={700}
-              >
-                <Text>Your cart is empty.</Text>
-              </PopoverBody>
-            </PopoverContent>
-          </Portal>
-        </Popover>
+        <ProductCart />
         <Box w={{ base: "30px", md: "50px" }} h={{ base: "30px", md: "50px" }}>
           <Image
             src={userAvatar}
