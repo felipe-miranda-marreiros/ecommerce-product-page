@@ -25,7 +25,21 @@ export const NavbarList: React.FC<NavbarListProps & Props> = (props) => {
         {links.map((link) => {
           return (
             <ListItem key={link.id} tabIndex={1}>
-              <Link>{link.name}</Link>
+              <Link
+                position="relative"
+                _hover={{
+                  _after: {
+                    content: '""',
+                    display: "block",
+                    position: "absolute",
+                    inset: "0 0 -52px 0",
+                    borderBottom: "4px solid orange",
+                  },
+                  color: "black",
+                }}
+              >
+                {link.name}
+              </Link>
             </ListItem>
           );
         })}

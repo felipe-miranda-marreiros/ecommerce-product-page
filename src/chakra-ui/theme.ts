@@ -19,7 +19,12 @@ const popover = {
     baseStyle: {
       content: {
         border: "none",
-        backgroundColor: "red",
+        backgroundColor: "white",
+        width: "360px",
+        height: "260px",
+        top: "16px",
+        right: "10px",
+        boxShadow: "2xl",
       },
     },
   },
