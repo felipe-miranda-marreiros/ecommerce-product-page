@@ -13,8 +13,18 @@ import plusIcon from "../../assets/icon-plus.svg";
 import { Cart } from "../../assets/icon/Cart";
 import { useAppState } from "../../context/context";
 
+import productThumbnail1 from "../../assets/image-product-1-thumbnail.jpg";
+import { nanoid } from "nanoid";
+
+const productItemCart = {
+  id: nanoid(),
+  title: "Fall Limited Edition Sneakers",
+  price: "125.00",
+  thumbnail: productThumbnail1,
+};
+
 export const Main = () => {
-  const { amount, changeAmount } = useAppState();
+  const { amount, changeAmount, addToCart } = useAppState();
   return (
     <VStack
       as="main"
@@ -109,6 +119,7 @@ export const Main = () => {
           color="white"
           w="100%"
           boxShadow="0px 10px 40px #ff7d1ab0"
+          onClick={() => addToCart(productItemCart)}
         >
           Add to cart
         </Button>

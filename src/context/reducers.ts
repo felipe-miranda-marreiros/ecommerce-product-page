@@ -1,16 +1,17 @@
 import { Reducer } from "react";
-import { InitialStateProps } from "./context";
+import { InitialStateProps, ProductItemProps } from "./context";
 
 enum ActionEnums {
   REMOVE_AMOUNT = "REMOVE_AMOUNT",
   ADD_AMOUNT = "ADD_AMOUNT",
+  ADD_CART = "ADD_CART",
 }
 
 type ActionsUnion = keyof typeof ActionEnums;
 
 type Action = {
   type: ActionsUnion;
-  payload?: string;
+  payload?: any;
 };
 
 export const reducer: Reducer<InitialStateProps, Action> = (
@@ -41,6 +42,24 @@ export const reducer: Reducer<InitialStateProps, Action> = (
         ...state,
         amount: state.amount - 1,
       };
+
+    case "ADD_CART":
+      let newItemCart: ProductItemProps | any = {};
+      if (state.amount > 0 && typeof action.payload === "object") {
+        const itemCart = { ...action.payload };
+        itemCart.amount = state.amount;
+        itemCart.totalPrice = state.amount * itemCart.price;
+        newItemCart = { ...itemCart };
+        return {
+          ...state,
+          cart: [...state.cart, newItemCart],
+        };
+      }
+      return {
+        ...state,
+        cart: [...state.cart, action.payload],
+      };
+
     default:
       return { ...state };
   }

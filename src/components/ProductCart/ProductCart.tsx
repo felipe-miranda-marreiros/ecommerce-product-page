@@ -16,14 +16,8 @@ import {
 
 import cartIcon from "../../assets/icon-cart.svg";
 import deleteIcon from "../../assets/icon-delete.svg";
-
-interface ProductCartItemProps {
-  thumbnail: string;
-  title: string;
-  totalPrice: number;
-}
-
 import productThumbnail1 from "../../assets/image-product-1-thumbnail.jpg";
+import { useAppState } from "../../context/context";
 
 export const ProductCartItem = () => {
   return (
@@ -53,6 +47,7 @@ export const ProductCartItem = () => {
 
 export const ProductCart = () => {
   const { isOpen, onToggle } = useDisclosure();
+  const { cart } = useAppState();
 
   return (
     <Popover closeOnBlur strategy="fixed" boundary="clippingParents">
@@ -76,25 +71,30 @@ export const ProductCart = () => {
               p="33px 25px"
               fontSize="sm"
               flex="1"
-              // display="grid"
               color="neutral.dark-grayish-blue"
               fontWeight={700}
               display="flex"
               justifyContent="space-between"
               flexDirection="column"
+              placeItems={cart.length === 0 ? "center" : undefined}
             >
-              {/* <Text>Your cart is empty.</Text> */}
-              <ProductCartItem />
-              <Button
-                type="button"
-                backgroundColor="primary.orange"
-                color="white"
-                w="full"
-                h="56px"
-                variant="unstyled"
-              >
-                Checkout
-              </Button>
+              {cart.length === 0 ? (
+                <Text m="auto">Your cart is empty.</Text>
+              ) : (
+                <>
+                  <ProductCartItem />
+                  <Button
+                    type="button"
+                    backgroundColor="primary.orange"
+                    color="white"
+                    w="full"
+                    h="56px"
+                    variant="unstyled"
+                  >
+                    Checkout
+                  </Button>
+                </>
+              )}
             </PopoverBody>
           </PopoverContent>
         </Portal>
