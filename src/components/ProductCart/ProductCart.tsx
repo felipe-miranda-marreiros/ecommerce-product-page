@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Fade,
   Flex,
   Image,
   Popover,
@@ -10,6 +11,7 @@ import {
   PopoverTrigger,
   Portal,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import cartIcon from "../../assets/icon-cart.svg";
@@ -50,44 +52,53 @@ export const ProductCartItem = () => {
 };
 
 export const ProductCart = () => {
+  const { isOpen, onToggle } = useDisclosure();
+
   return (
     <Popover closeOnBlur strategy="fixed" boundary="clippingParents">
       <PopoverTrigger>
-        <Button type="button" variant="unstyled">
+        <Button type="button" variant="unstyled" onClick={onToggle}>
           <Image src={cartIcon} alt="Cart icon" />
         </Button>
       </PopoverTrigger>
-      <Portal>
-        <PopoverContent>
-          <PopoverHeader p="20px" fontSize="md" color="black" fontWeight={700}>
-            Cart
-          </PopoverHeader>
-          <PopoverBody
-            p="33px 25px"
-            fontSize="sm"
-            flex="1"
-            // display="grid"
-            color="neutral.dark-grayish-blue"
-            fontWeight={700}
-            display="flex"
-            justifyContent="space-between"
-            flexDirection="column"
-          >
-            {/* <Text>Your cart is empty.</Text> */}
-            <ProductCartItem />
-            <Button
-              type="button"
-              backgroundColor="primary.orange"
-              color="white"
-              w="full"
-              h="56px"
-              variant="unstyled"
+      <Fade in={isOpen}>
+        <Portal>
+          <PopoverContent>
+            <PopoverHeader
+              p="20px"
+              fontSize="md"
+              color="black"
+              fontWeight={700}
             >
-              Checkout
-            </Button>
-          </PopoverBody>
-        </PopoverContent>
-      </Portal>
+              Cart
+            </PopoverHeader>
+            <PopoverBody
+              p="33px 25px"
+              fontSize="sm"
+              flex="1"
+              // display="grid"
+              color="neutral.dark-grayish-blue"
+              fontWeight={700}
+              display="flex"
+              justifyContent="space-between"
+              flexDirection="column"
+            >
+              {/* <Text>Your cart is empty.</Text> */}
+              <ProductCartItem />
+              <Button
+                type="button"
+                backgroundColor="primary.orange"
+                color="white"
+                w="full"
+                h="56px"
+                variant="unstyled"
+              >
+                Checkout
+              </Button>
+            </PopoverBody>
+          </PopoverContent>
+        </Portal>
+      </Fade>
     </Popover>
   );
 };

@@ -11,8 +11,10 @@ import {
 import minusIcon from "../../assets/icon-minus.svg";
 import plusIcon from "../../assets/icon-plus.svg";
 import { Cart } from "../../assets/icon/Cart";
+import { useAppState } from "../../context/context";
 
 export const Main = () => {
+  const { amount, changeAmount } = useAppState();
   return (
     <VStack
       as="main"
@@ -89,13 +91,13 @@ export const Main = () => {
           borderRadius="8px"
           flexBasis="40%"
         >
-          <Button variant="unstyled">
+          <Button variant="unstyled" onClick={() => changeAmount("remove")}>
             <Image src={minusIcon} m="auto" alt="" />
           </Button>
           <Box color="black" fontWeight={700}>
-            0
+            {amount}
           </Box>
-          <Button variant="unstyled">
+          <Button variant="unstyled" onClick={() => changeAmount("add")}>
             <Image src={plusIcon} m="auto" alt="" />
           </Button>
         </Box>
