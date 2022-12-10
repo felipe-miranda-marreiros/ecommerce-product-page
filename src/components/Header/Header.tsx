@@ -37,7 +37,13 @@ export const Header = () => {
         gap={{ base: "0.35rem", md: "1.3rem" }}
       >
         <ProductCart />
-        <Box w={{ base: "30px", md: "50px" }} h={{ base: "30px", md: "50px" }}>
+        <Box
+          w={{ base: "30px", md: "50px" }}
+          h={{ base: "30px", md: "50px" }}
+          rounded="full"
+          cursor="pointer"
+          _hover={{ outline: "3px solid orange" }}
+        >
           <Image
             src={userAvatar}
             alt="Your photo"
