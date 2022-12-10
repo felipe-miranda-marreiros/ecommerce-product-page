@@ -1,5 +1,4 @@
 import {
-  Image,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -7,9 +6,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { ProductGallery } from "../ProductGallery/ProductGallery";
-import nextIcon from "../../assets/icon-next.svg";
-import previousIcon from "../../assets/icon-previous.svg";
 import { ProductModalProps } from "../../protocols/ProductProps";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 export const ProductModal: React.FC<ProductModalProps> = (props) => {
   const {
@@ -42,32 +40,42 @@ export const ProductModal: React.FC<ProductModalProps> = (props) => {
           <Button
             position="absolute"
             top="45%"
-            left="-10%"
+            left="-8%"
             backgroundColor="white"
-            variant="ghost"
+            variant="unstyled"
             rounded="full"
             transform="translate(50%, -100%)"
             zIndex={2}
             display={{ base: "none", md: "block" }}
             onClick={handlePreviousImage}
             disabled={tabIndex === 0}
+            _hover={{ bg: "white" }}
           >
-            <Image src={previousIcon} alt="" />
+            <ChevronLeftIcon
+              w="35px"
+              h="35px"
+              _hover={{ color: "primary.orange" }}
+            />
           </Button>
           <Button
             position="absolute"
             top="45%"
-            right="-10%"
+            right="-8%"
             backgroundColor="white"
-            variant="ghost"
+            variant="unstyled"
             rounded="full"
             transform="translate(-50%, -100%)"
             zIndex={2}
             display={{ base: "none", md: "block" }}
             onClick={handleNextImage}
             disabled={tabIndex === productImages.length - 1}
+            _hover={{ bg: "white" }}
           >
-            <Image src={nextIcon} alt="" />
+            <ChevronRightIcon
+              w="35px"
+              h="35px"
+              _hover={{ color: "primary.orange" }}
+            />
           </Button>
           <ProductGallery
             productImages={productImages}

@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Fade,
-  Image,
   Popover,
   PopoverBody,
   PopoverContent,
@@ -13,7 +12,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-import cartIcon from "../../assets/icon-cart.svg";
+import { Cart } from "../../assets/icon/Cart";
 import { useAppState } from "../../context/context";
 import { ProductCartItem } from "../ProductCartItem/ProductCartItem";
 
@@ -30,17 +29,17 @@ export const ProductCart = () => {
           variant="unstyled"
           onClick={onToggle}
         >
-          <Image src={cartIcon} alt="Cart icon" />
+          <Cart color="neutral.dark-grayish-blue" _hover={{ color: "black" }} />
           {cart.length ? (
             <Box
               position="absolute"
-              top={1}
-              right={3}
+              top={0}
+              right="2px"
               fontSize="10px"
               backgroundColor="primary.orange"
               color="white"
               borderRadius="6px"
-              px="6px"
+              px="7px"
             >
               {cart.map((item) => item.amount || cart.length)}
             </Box>
