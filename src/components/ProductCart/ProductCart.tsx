@@ -16,32 +16,45 @@ import {
 
 import cartIcon from "../../assets/icon-cart.svg";
 import deleteIcon from "../../assets/icon-delete.svg";
-import productThumbnail1 from "../../assets/image-product-1-thumbnail.jpg";
-import { useAppState } from "../../context/context";
+import { ProductItemProps, useAppState } from "../../context/context";
 
-export const ProductCartItem = () => {
+interface ProductCartItemProps {
+  data: ProductItemProps[];
+}
+
+export const ProductCartItem: React.FC<ProductCartItemProps> = ({ data }) => {
   return (
-    <Flex alignItems="center" justifyContent="space-between">
-      <Box h="50px" w="50px">
-        <Image
-          borderRadius="8px"
-          src={productThumbnail1}
-          alt="Fall Limited Edition Sneakers"
-        />
-      </Box>
-      <Box>
-        <Text fontWeight={400}>Fall Limited Edition Sneakers</Text>
-        <Text fontWeight={400}>
-          $125.00 x 3{" "}
-          <Text as="span" fontWeight={700} color="black">
-            $375.00
-          </Text>
-        </Text>
-      </Box>
-      <Button variant="unstyled">
-        <Image src={deleteIcon} />
-      </Button>
-    </Flex>
+    <>
+      {data.map((product) => {
+        return (
+          <Flex
+            key={product.id}
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Box h="50px" w="50px">
+              <Image
+                borderRadius="8px"
+                src={product.thumbnail}
+                alt={product.title}
+              />
+            </Box>
+            <Box>
+              <Text fontWeight={400}>{product.title}</Text>
+              <Text fontWeight={400}>
+                ${product.price} x {product.amount}{" "}
+                <Text as="span" fontWeight={700} color="black">
+                  ${product.totalPrice?.toFixed(2)}
+                </Text>
+              </Text>
+            </Box>
+            <Button variant="unstyled">
+              <Image src={deleteIcon} />
+            </Button>
+          </Flex>
+        );
+      })}
+    </>
   );
 };
 
@@ -82,7 +95,7 @@ export const ProductCart = () => {
                 <Text m="auto">Your cart is empty.</Text>
               ) : (
                 <>
-                  <ProductCartItem />
+                  <ProductCartItem data={cart} />
                   <Button
                     type="button"
                     backgroundColor="primary.orange"

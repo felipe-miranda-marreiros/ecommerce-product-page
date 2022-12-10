@@ -52,12 +52,12 @@ export const reducer: Reducer<InitialStateProps, Action> = (
         newItemCart = { ...itemCart };
         return {
           ...state,
-          cart: [...state.cart, newItemCart],
+          cart: [newItemCart],
         };
       }
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: [action.payload],
       };
 
     default:
