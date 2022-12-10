@@ -45,7 +45,7 @@ export const reducer: Reducer<InitialStateProps, Action> = (
 
     case "ADD_CART":
       let newItemCart: ProductItemProps | any = {};
-      if (state.amount > 0 && typeof action.payload === "object") {
+      if (state.amount > 1 && typeof action.payload === "object") {
         const itemCart = { ...action.payload };
         itemCart.amount = state.amount;
         itemCart.totalPrice = state.amount * itemCart.price;

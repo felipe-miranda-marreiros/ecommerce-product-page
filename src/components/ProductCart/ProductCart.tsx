@@ -42,9 +42,11 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({ data }) => {
             <Box>
               <Text fontWeight={400}>{product.title}</Text>
               <Text fontWeight={400}>
-                ${product.price} x {product.amount}{" "}
+                ${product.price} {product.amount ? `x ${product.amount}` : null}{" "}
                 <Text as="span" fontWeight={700} color="black">
-                  ${product.totalPrice?.toFixed(2)}
+                  {product.totalPrice
+                    ? `$ ${product.totalPrice?.toFixed(2)}`
+                    : null}
                 </Text>
               </Text>
             </Box>
@@ -65,8 +67,27 @@ export const ProductCart = () => {
   return (
     <Popover closeOnBlur strategy="fixed" boundary="clippingParents">
       <PopoverTrigger>
-        <Button type="button" variant="unstyled" onClick={onToggle}>
+        <Button
+          position="relative"
+          type="button"
+          variant="unstyled"
+          onClick={onToggle}
+        >
           <Image src={cartIcon} alt="Cart icon" />
+          {cart.length ? (
+            <Box
+              position="absolute"
+              top={1}
+              right={3}
+              fontSize="10px"
+              backgroundColor="primary.orange"
+              color="white"
+              borderRadius="6px"
+              px="6px"
+            >
+              {cart.map((item) => item.amount || cart.length)}
+            </Box>
+          ) : null}
         </Button>
       </PopoverTrigger>
       <Fade in={isOpen}>
