@@ -18,6 +18,7 @@ export type InitialStateProps = {
 type Actions = {
   changeAmount: (type: string) => void;
   addToCart: (item: ProductItemProps) => void;
+  removeCartItems: () => void;
 };
 
 const initialState: InitialStateProps & Actions = {
@@ -25,6 +26,7 @@ const initialState: InitialStateProps & Actions = {
   cart: [],
   changeAmount: (string: string) => {},
   addToCart: (item: ProductItemProps) => {},
+  removeCartItems: () => {},
 };
 
 const AppContext = createContext<InitialStateProps & Actions>(
@@ -48,8 +50,14 @@ export const AppProvider: React.FC<Props> = ({ children }) => {
     dispatch({ type: "ADD_CART", payload: item });
   };
 
+  const removeCartItems = () => {
+    dispatch({ type: "REMOVE_CART" });
+  };
+
   return (
-    <AppContext.Provider value={{ ...state, changeAmount, addToCart }}>
+    <AppContext.Provider
+      value={{ ...state, changeAmount, addToCart, removeCartItems }}
+    >
       {children}
     </AppContext.Provider>
   );

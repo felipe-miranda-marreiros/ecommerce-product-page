@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Fade,
-  Flex,
   Image,
   Popover,
   PopoverBody,
@@ -15,50 +14,8 @@ import {
 } from "@chakra-ui/react";
 
 import cartIcon from "../../assets/icon-cart.svg";
-import deleteIcon from "../../assets/icon-delete.svg";
-import { ProductItemProps, useAppState } from "../../context/context";
-
-interface ProductCartItemProps {
-  data: ProductItemProps[];
-}
-
-export const ProductCartItem: React.FC<ProductCartItemProps> = ({ data }) => {
-  return (
-    <>
-      {data.map((product) => {
-        return (
-          <Flex
-            key={product.id}
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Box h="50px" w="50px">
-              <Image
-                borderRadius="8px"
-                src={product.thumbnail}
-                alt={product.title}
-              />
-            </Box>
-            <Box>
-              <Text fontWeight={400}>{product.title}</Text>
-              <Text fontWeight={400}>
-                ${product.price} {product.amount ? `x ${product.amount}` : null}{" "}
-                <Text as="span" fontWeight={700} color="black">
-                  {product.totalPrice
-                    ? `$ ${product.totalPrice?.toFixed(2)}`
-                    : null}
-                </Text>
-              </Text>
-            </Box>
-            <Button variant="unstyled">
-              <Image src={deleteIcon} />
-            </Button>
-          </Flex>
-        );
-      })}
-    </>
-  );
-};
+import { useAppState } from "../../context/context";
+import { ProductCartItem } from "../ProductCartItem/ProductCartItem";
 
 export const ProductCart = () => {
   const { isOpen, onToggle } = useDisclosure();

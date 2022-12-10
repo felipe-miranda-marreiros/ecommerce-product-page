@@ -5,6 +5,7 @@ enum ActionEnums {
   REMOVE_AMOUNT = "REMOVE_AMOUNT",
   ADD_AMOUNT = "ADD_AMOUNT",
   ADD_CART = "ADD_CART",
+  REMOVE_CART = "REMOVE_CART",
 }
 
 type ActionsUnion = keyof typeof ActionEnums;
@@ -58,6 +59,12 @@ export const reducer: Reducer<InitialStateProps, Action> = (
       return {
         ...state,
         cart: [action.payload],
+      };
+
+    case "REMOVE_CART":
+      return {
+        ...state,
+        cart: [],
       };
 
     default:
